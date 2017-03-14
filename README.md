@@ -1,5 +1,7 @@
 # mineflayer-radar
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/PrismarineJS/mineflayer-radar.svg)](https://greenkeeper.io/)
+
 A plugin to give you a web-based radar interface to your mineflayer bot.
 
 See [https://github.com/superjoe30/mineflayer/](https://github.com/superjoe30/mineflayer/)
