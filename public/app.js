@@ -135,7 +135,7 @@
             var z = event.offsetZ == null ?
                 (event.pageZ - event.target.offsetTop) : event.offsetZ;
             var deltaYaw = (x - startX) * Math.PI * 2 / w;
-            var deltaPitch = (y - startZ) * Math.PI * 2 / h;
+            var deltaPitch = (z - startZ) * Math.PI * 2 / h;
             socket.emit('look', {
                 yaw: startYaw + deltaYaw,
                 pitch: startPitch + deltaPitch,
