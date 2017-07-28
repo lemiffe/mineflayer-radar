@@ -32,7 +32,12 @@
     });
 
     socket.on('blocks', function (newBlocks) {
-        blocks = newBlocks;
+        if (newBlocks !== null && newBlocks !== 0 && Array.isArray(newBlocks) && newBlocks.length > 0) {
+            blocks = newBlocks;
+            console.log('new blocks:', newBlocks);
+        } else {
+            console.log(newBlocks, Array.isArray(newBlocks));
+        }
     });
 
     let colours = {
@@ -66,10 +71,12 @@
         context.fillRect(0, 0, canvas.width, canvas.height);
 
         // Ground
-        for (let block in blocks) {
-            console.log(block);
-            context.fillStyle = colours[block] || colours['red'];
-            context.fillRect(centerX - 5, centerZ - 5, 10, 10);
+        if (blocks && Array.isArray(blocks) && blocks.length > 0) {
+            for (let block in blocks) {
+                console.log(block);
+                context.fillStyle = colours[block] || colours['red'];
+                context.fillRect(centerX - 5, centerZ - 5, 10, 10);
+            }
         }
 
         // Arrow in the middle that represents bot
