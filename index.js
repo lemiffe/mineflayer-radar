@@ -27,12 +27,12 @@ function inject(bot, options) {
         bot.on('move', function() {
             socket.emit('entity', bot.entity);
             let blocks = [];
-            const y = bot.entity.position.y;
-            for (let x = bot.entity.position.x - 1; bot.entity.position.x + 1; x++) {
-                for (let z = bot.entity.position.z - 1; bot.entity.position.z + 1; z++) {
+            const y = bot.entity.position.y - 1;
+            for (let x = Math.round(bot.entity.position.x) - 1; Math.round(bot.entity.position.x) + 1; x++) {
+                for (let z = Math.round(bot.entity.position.z) - 1; Math.round(bot.entity.position.z) + 1; z++) {
                     const x = bot.entity.position.x;
                     const z = bot.entity.position.z;
-                    let pos = vec3(x, y - 1, z);
+                    let pos = vec3(x, y, z);
                     let block = bot.blockAt(pos);
                     if (block && block.position) {
                         blocks.push({type: block.type, name: block.name, x: block.position.x, z: block.position.z});
