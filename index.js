@@ -34,7 +34,7 @@ function inject(bot, options) {
                     const z = bot.entity.position.z;
                     let pos = vec3(x, y - 1, z);
                     let block = bot.blockAt(pos);
-                    if (block) {
+                    if (block && block.position) {
                         blocks.push({type: block.type, name: block.name, x: block.position.x, z: block.position.z});
                     }
            //     }
