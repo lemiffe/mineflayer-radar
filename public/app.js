@@ -34,9 +34,6 @@
     socket.on('blocks', function (newBlocks) {
         if (newBlocks !== null && newBlocks !== 0 && Array.isArray(newBlocks) && newBlocks.length > 0) {
             blocks = newBlocks;
-            console.log('new blocks:', newBlocks);
-        } else {
-            console.log(newBlocks, Array.isArray(newBlocks));
         }
     });
 
@@ -72,11 +69,10 @@
 
         // Ground
         if (blocks && Array.isArray(blocks) && blocks.length > 0) {
-            for (let block in blocks) {
-                console.log(block);
-                context.fillStyle = colours[block] || colours['red'];
+            blocks.forEach(function(colour) {
+                context.fillStyle = colours[colour] || colours['red'];
                 context.fillRect(centerX - 5, centerZ - 5, 10, 10);
-            }
+            });
         }
 
         // Arrow in the middle that represents bot
