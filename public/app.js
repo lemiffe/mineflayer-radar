@@ -67,6 +67,7 @@
 
         // Ground
         for (let block in blocks) {
+            console.log(block);
             context.fillStyle = colours[block] || colours['red'];
             context.fillRect(centerX - 5, centerZ - 5, 10, 10);
         }
