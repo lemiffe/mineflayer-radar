@@ -31,13 +31,12 @@ function inject(bot, options) {
         setTimeout(function() {
             setInterval(function() {
                 if (bot && bot.entity && bot.entity.position) {
-                    console.log('*-*');
                     let blocks = [];
                     const y = bot.entity.position.y - 1;
                     const botX = Math.round(bot.entity.position.x);
                     const botZ = Math.round(bot.entity.position.z);
-                    for (let x = botX - 1; botX + 1; x++) {
-                        for (let z = botZ - 1; botZ + 1; z++) {
+                    for (let x = (botX - 1); x <= botX + 1; x++) {
+                        for (let z = (botZ - 1); z <= botZ + 1; z++) {
                             let pos = vec3(x, y, z);
                             let block = bot.blockAt(pos);
                             if (block && block.position) {
@@ -46,10 +45,9 @@ function inject(bot, options) {
                         }
                     }
                     socket.emit('blocks', blocks);
-                    console.log(blocks);
                 }
             }, 1000);
-        }, 6000);
+        }, 8000);
 
         bot.on('entitySpawn', function(entity) {
             socket.emit('entitySpawn', entity);
