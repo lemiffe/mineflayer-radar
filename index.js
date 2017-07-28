@@ -34,10 +34,10 @@ function inject(bot, options) {
                     console.log('*-*');
                     let blocks = [];
                     const y = bot.entity.position.y - 1;
-                    for (let x = Math.round(bot.entity.position.x) - 1; Math.round(bot.entity.position.x) + 1; x++) {
-                        for (let z = Math.round(bot.entity.position.z) - 1; Math.round(bot.entity.position.z) + 1; z++) {
-                            const x = bot.entity.position.x;
-                            const z = bot.entity.position.z;
+                    const botX = Math.round(bot.entity.position.x);
+                    const botZ = Math.round(bot.entity.position.z);
+                    for (let x = botX - 1; botX + 1; x++) {
+                        for (let z = botZ - 1; botZ + 1; z++) {
                             let pos = vec3(x, y, z);
                             let block = bot.blockAt(pos);
                             if (block && block.position) {
