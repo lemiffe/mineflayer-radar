@@ -1,11 +1,13 @@
 (function() {
-    var io = window.io
-        , socket = io.connect()
-        , canvas = document.getElementById('canvas')
-        , context = canvas.getContext('2d')
-        , drawInterval = setInterval(draw, 50)
-        , botEntity
-        , entities = {};
+    const io = window.io,
+        socket = io.connect(),
+        canvas = document.getElementById('canvas'),
+        context = canvas.getContext('2d'),
+        drawInterval = setInterval(draw, 50);
+
+    let botEntity = null,
+        blocks = [],
+        entities = {};
 
     // add tabindex property to canvas so that it can receive keyboard input
     canvas.tabIndex = 0;
@@ -29,17 +31,27 @@
         delete entities[oldEntity.id];
     });
 
-    var white = '#ffffff'
-        , black = '#000000'
-        , imgArrow = new Image()
-        , imgBlueArrow = new Image()
-        , imgRedArrow = new Image()
-        , w = canvas.width
-        , h = canvas.height
-        , centerX = w / 2
-        , centerZ = h / 2
-        , xFromMc = w / 100
-        , zFromMc = h / 100;
+    socket.on('blocks', function (newBlocks) {
+        blocks = newBlocks;
+    });
+
+    let colours = {
+        white: '#ffffff',
+        black: '#000000',
+        brown: '#9b7729',
+        green: '#0000cc',
+        stone: '#bbbbbb'
+    };
+
+    let imgArrow = new Image(),
+        imgBlueArrow = new Image(),
+        imgRedArrow = new Image(),
+        w = canvas.width,
+        h = canvas.height,
+        centerX = w / 2,
+        centerZ = h / 2,
+        xFromMc = w / 100,
+        zFromMc = h / 100;
 
     imgArrow.src = '/arrow.png';
     imgBlueArrow.src = '/arrow-blue.png';
@@ -49,12 +61,14 @@
         if (!botEntity) return;
 
         // Fill with black
-        context.fillStyle = black;
+        context.fillStyle = colours['black'];
         context.fillRect(0, 0, canvas.width, canvas.height);
 
         // Ground
-        context.fillStyle = '#9b7729';
-        context.fillRect(centerX - 5, centerZ - 5, 10, 10);
+        for (let block in blocks) {
+            context.fillStyle = colours[block];
+            context.fillRect(centerX - 5, centerZ - 5, 10, 10);
+        }
 
         // Arrow in the middle that represents bot
         context.save();
@@ -64,25 +78,25 @@
         context.restore();
 
         // Entities
-        for (var entityId in entities) {
-            var entity = entities[entityId];
+        for (let entityId in entities) {
+            const entity = entities[entityId];
             if (entity.username && entity.username === botEntity.username) continue;
 
-            var x = centerX + xFromMc * (entity.position.x - botEntity.position.x);
-            var z = centerZ + zFromMc * (entity.position.z - botEntity.position.z);
+            const x = centerX + xFromMc * (entity.position.x - botEntity.position.x);
+            const z = centerZ + zFromMc * (entity.position.z - botEntity.position.z);
             context.save();
             context.translate(x, z);
             context.rotate(1.5 * Math.PI - entity.yaw);
             context.drawImage(imgBlueArrow, 0, 0, 12, 12, -6, -6, 12, 12);
             context.restore();
 
-            context.fillStyle = white;
+            context.fillStyle = colours['white'];
             context.textBaseline = 'center';
             context.fillText(entityText(entity), x, z - 20);
         }
 
         // Debug
-        context.fillStyle = white;
+        context.fillStyle = colours['white'];
         context.textBaseline = "top";
         context.fillText("yaw: " + botEntity.yaw, 0, 0);
     }
