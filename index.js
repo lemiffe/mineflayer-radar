@@ -24,9 +24,11 @@ function inject(bot, options) {
     });
 
     io.sockets.on('connection', function (socket) {
-        //bot.on('move', function() {
-        setInterval(function() {
+        bot.on('move', function() {
             socket.emit('entity', bot.entity);
+        });
+
+        setInterval(function() {
             let blocks = [];
             const y = bot.entity.position.y - 1;
             for (let x = Math.round(bot.entity.position.x) - 1; Math.round(bot.entity.position.x) + 1; x++) {
@@ -41,7 +43,7 @@ function inject(bot, options) {
                 }
             }
             socket.emit('blocks', blocks);
-        }, 100);
+        }, 200);
 
         bot.on('entitySpawn', function(entity) {
             socket.emit('entitySpawn', entity);
