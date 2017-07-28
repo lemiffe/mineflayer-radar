@@ -31,6 +31,7 @@ function inject(bot, options) {
         setTimeout(function() {
             setInterval(function() {
                 if (bot && bot.entity && bot.entity.position) {
+                    console.log('*-*');
                     let blocks = [];
                     const y = bot.entity.position.y - 1;
                     for (let x = Math.round(bot.entity.position.x) - 1; Math.round(bot.entity.position.x) + 1; x++) {
@@ -47,8 +48,8 @@ function inject(bot, options) {
                     socket.emit('blocks', blocks);
                     console.log(blocks);
                 }
-            }, 500);
-        }, 3000);
+            }, 1000);
+        }, 6000);
 
         bot.on('entitySpawn', function(entity) {
             socket.emit('entitySpawn', entity);
