@@ -27,8 +27,8 @@ function inject(bot, options) {
         bot.on('move', function() {
             socket.emit('entity', bot.entity);
             blocks = [];
-            for (let x = bot.entity.position.x - 10; bot.entity.position.x + 10; x++) {
-                for (let z = bot.entity.position.z - 10; bot.entity.position.z + 10; z++) {
+            for (let x = bot.entity.position.x - 2; bot.entity.position.x + 2; x++) {
+                for (let z = bot.entity.position.z - 2; bot.entity.position.z + 2; z++) {
                     let pos = vec3(x, bot.entity.position.y - 1, z);
                     let block = bot.blockAt(pos);
                     if (block) {
