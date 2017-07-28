@@ -33,14 +33,13 @@
 
     socket.on('blocks', function (newBlocks) {
         blocks = newBlocks;
-        console.log(blocks);
     });
 
     let colours = {
         white: '#ffffff',
         black: '#000000',
         brown: '#9b7729',
-        green: '#0000cc',
+        green: '#0000ff',
         stone: '#bbbbbb'
     };
 
