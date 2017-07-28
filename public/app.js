@@ -54,7 +54,7 @@
 
         // Ground
         context.fillStyle = '#9b7729';
-        context.fillRect(centerX - 5, centerZ - 5, centerX + 5, centerZ + 5);
+        context.fillRect(centerX - 5, centerZ - 5, 10, 10);
 
         // Arrow in the middle that represents bot
         context.save();
