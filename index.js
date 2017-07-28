@@ -35,8 +35,8 @@ function inject(bot, options) {
                     const y = bot.entity.position.y - 1;
                     const botX = Math.round(bot.entity.position.x);
                     const botZ = Math.round(bot.entity.position.z);
-                    for (let x = (botX - 1); x <= botX + 1; x++) {
-                        for (let z = (botZ - 1); z <= botZ + 1; z++) {
+                    for (let x = botX - 3; x <= botX + 3; x++) {
+                        for (let z = botZ - 2; z <= botZ + 2; z++) {
                             let pos = vec3(x, y, z);
                             let block = bot.blockAt(pos);
                             if (block && block.position) {
