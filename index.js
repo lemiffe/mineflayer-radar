@@ -29,20 +29,23 @@ function inject(bot, options) {
         });
 
         setInterval(function() {
-            let blocks = [];
-            const y = bot.entity.position.y - 1;
-            for (let x = Math.round(bot.entity.position.x) - 1; Math.round(bot.entity.position.x) + 1; x++) {
-                for (let z = Math.round(bot.entity.position.z) - 1; Math.round(bot.entity.position.z) + 1; z++) {
-                    const x = bot.entity.position.x;
-                    const z = bot.entity.position.z;
-                    let pos = vec3(x, y, z);
-                    let block = bot.blockAt(pos);
-                    if (block && block.position) {
-                        blocks.push({type: block.type, name: block.name, x: block.position.x, z: block.position.z});
+            if (bot && bot.entity && bot.entity.position) {
+                let blocks = [];
+                const y = bot.entity.position.y - 1;
+                for (let x = Math.round(bot.entity.position.x) - 1; Math.round(bot.entity.position.x) + 1; x++) {
+                    for (let z = Math.round(bot.entity.position.z) - 1; Math.round(bot.entity.position.z) + 1; z++) {
+                        const x = bot.entity.position.x;
+                        const z = bot.entity.position.z;
+                        let pos = vec3(x, y, z);
+                        let block = bot.blockAt(pos);
+                        if (block && block.position) {
+                            blocks.push({type: block.type, name: block.name, x: block.position.x, z: block.position.z});
+                        }
                     }
                 }
+                socket.emit('blocks', blocks);
+                console.log(blocks);
             }
-            socket.emit('blocks', blocks);
         }, 200);
 
         bot.on('entitySpawn', function(entity) {
