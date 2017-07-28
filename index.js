@@ -1,4 +1,5 @@
 module.exports = init;
+const vec3 = require('vec3');
 
 function init(mineflayer) {
     return inject;
@@ -26,7 +27,11 @@ function inject(bot, options) {
         bot.on('move', function() {
             socket.emit('entity', bot.entity);
             socket.emit('blocks', ['green']);
-            console.log(bot.blockAt(bot.entity.position));
+            let underbot = vec3(bot.entity.position.x, bot.entity.position.y - 1, bot.entity.position.z);
+            let block = bot.blockAt(underbot);
+            if (block) {
+                console.log(block.type, block.name);
+            }
         });
 
         bot.on('entitySpawn', function(entity) {
