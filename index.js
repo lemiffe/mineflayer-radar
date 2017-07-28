@@ -46,8 +46,8 @@ function inject(bot, options) {
                     }
                     socket.emit('blocks', blocks);
                 }
-            }, 1000);
-        }, 8000);
+            }, 600);
+        }, 6000);
 
         bot.on('entitySpawn', function(entity) {
             socket.emit('entitySpawn', entity);
