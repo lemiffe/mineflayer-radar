@@ -26,11 +26,10 @@ function inject(bot, options) {
     io.sockets.on('connection', function (socket) {
         bot.on('move', function() {
             socket.emit('entity', bot.entity);
-            socket.emit('blocks', ['green']);
             let underbot = vec3(bot.entity.position.x, bot.entity.position.y - 1, bot.entity.position.z);
             let block = bot.blockAt(underbot);
             if (block) {
-                console.log(block.type, block.name);
+                socket.emit('blocks', [{type: block.type ? block.type.split(':')[0] : 0, name: block.name}]);
             }
         });
 

@@ -46,6 +46,27 @@
         red: '#ff0000',
     };
 
+    let blockColours = {
+        1: '#5D5D5D',
+        2: '#77B350',
+        3: '#A37450',
+        4: '#606060',
+        5: '#A88754',
+        6: '#1F9010',
+        7: '#666666',
+        8: '#284292',
+        9: '#284292',
+        10: '#BC3904',
+        11: '#BC3904',
+        12: '#E0D6A6',
+        13: '#786C6C',
+        14: '#8C7958',
+        15: '#837164',
+        16: '#222222',
+        17: '#463315',
+        18: '#357B16',
+    };
+
     let imgArrow = new Image(),
         imgBlueArrow = new Image(),
         imgRedArrow = new Image(),
@@ -69,8 +90,8 @@
 
         // Ground
         if (blocks && Array.isArray(blocks) && blocks.length > 0) {
-            blocks.forEach(function(colour) {
-                context.fillStyle = colours[colour] || colours['red'];
+            blocks.forEach(function(block) {
+                context.fillStyle = blockColours[block.type] || colours['red'];
                 context.fillRect(centerX - 5, centerZ - 5, 10, 10);
             });
         }
