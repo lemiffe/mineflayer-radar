@@ -46,7 +46,7 @@
     imgRedArrow.src = '/arrow-red.png';
 
     function draw() {
-        if (! botEntity) return;
+        if (!botEntity) return;
 
         // Fill with black
         context.fillStyle = black;
@@ -66,6 +66,8 @@
         // Entities
         for (var entityId in entities) {
             var entity = entities[entityId];
+            if (entity.username && entity.username === botEntity.username) continue;
+
             var x = centerX + xFromMc * (entity.position.x - botEntity.position.x);
             var z = centerZ + zFromMc * (entity.position.z - botEntity.position.z);
             context.save();
