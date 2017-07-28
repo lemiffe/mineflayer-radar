@@ -28,8 +28,8 @@ function inject(bot, options) {
             socket.emit('entity', bot.entity);
             let blocks = [];
             const y = bot.entity.position.y;
-            //for (let x = bot.entity.position.x ; bot.entity.position.x ; x++) {
-//                for (let z = bot.entity.position.z ; bot.entity.position.z ; z++) {
+            for (let x = bot.entity.position.x - 1; bot.entity.position.x + 1; x++) {
+                for (let z = bot.entity.position.z - 1; bot.entity.position.z + 1; z++) {
                     const x = bot.entity.position.x;
                     const z = bot.entity.position.z;
                     let pos = vec3(x, y - 1, z);
@@ -37,8 +37,8 @@ function inject(bot, options) {
                     if (block && block.position) {
                         blocks.push({type: block.type, name: block.name, x: block.position.x, z: block.position.z});
                     }
-           //     }
-         //   }
+                }
+            }
             socket.emit('blocks', blocks);
         });
 
