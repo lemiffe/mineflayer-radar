@@ -94,7 +94,7 @@
                 context.fillStyle = blockColours[block.type] || colours['red'];
                 const x = centerX + xFromMc * (block.x - botEntity.position.x);
                 const z = centerZ + zFromMc * (block.z - botEntity.position.z);
-                context.fillRect(x, z, 10, 10);
+                context.fillRect(x - 5, z - 5, 10, 10);
             });
         }
 
