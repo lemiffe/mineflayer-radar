@@ -26,13 +26,14 @@ function inject(bot, options) {
     io.sockets.on('connection', function (socket) {
         bot.on('move', function() {
             socket.emit('entity', bot.entity);
-            blocks = [];
+            let blocks = [];
+            const y = bot.entity.position.y;
             for (let x = bot.entity.position.x - 1; bot.entity.position.x + 1; x++) {
                 for (let z = bot.entity.position.z - 1; bot.entity.position.z + 1; z++) {
-                    let pos = vec3(x, bot.entity.position.y - 1, z);
+                    let pos = vec3(x, y - 1, z);
                     let block = bot.blockAt(pos);
                     if (block) {
-                        blocks.push({type: block.type, name: block.name, position: block.position});
+                        blocks.push({type: block.type, name: block.name, x: block.position.x, z: block.position.z});
                     }
                 }
             }
