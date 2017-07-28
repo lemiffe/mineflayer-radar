@@ -29,7 +29,7 @@ function inject(bot, options) {
             let underbot = vec3(bot.entity.position.x, bot.entity.position.y - 1, bot.entity.position.z);
             let block = bot.blockAt(underbot);
             if (block) {
-                socket.emit('blocks', [{type: block.type ? block.type.split(':')[0] : 0, name: block.name}]);
+                socket.emit('blocks', [{type: block.type, name: block.name}]);
             }
         });
 
