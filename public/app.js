@@ -40,7 +40,8 @@
         black: '#000000',
         brown: '#9b7729',
         green: '#0000ff',
-        stone: '#bbbbbb'
+        stone: '#bbbbbb',
+        red: '#ff0000',
     };
 
     let imgArrow = new Image(),
@@ -66,7 +67,7 @@
 
         // Ground
         for (let block in blocks) {
-            context.fillStyle = colours[block];
+            context.fillStyle = colours[block] || colours['red'];
             context.fillRect(centerX - 5, centerZ - 5, 10, 10);
         }
 
