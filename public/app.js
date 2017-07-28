@@ -33,6 +33,7 @@
 
     socket.on('blocks', function (newBlocks) {
         blocks = newBlocks;
+        console.log(blocks);
     });
 
     let colours = {
