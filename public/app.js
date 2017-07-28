@@ -92,7 +92,9 @@
         if (blocks && Array.isArray(blocks) && blocks.length > 0) {
             blocks.forEach(function(block) {
                 context.fillStyle = blockColours[block.type] || colours['red'];
-                context.fillRect(centerX - 5, centerZ - 5, 10, 10);
+                const x = centerX + xFromMc * (block.position.x - block.position.x);
+                const z = centerZ + zFromMc * (block.position.z - block.position.z);
+                context.fillRect(x - 5, z - 5, 10, 10);
             });
         }
 
