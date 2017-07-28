@@ -41,7 +41,7 @@
         white: '#ffffff',
         black: '#000000',
         brown: '#9b7729',
-        green: '#0000ff',
+        green: '#00cc00',
         stone: '#bbbbbb',
         red: '#ff0000',
     };

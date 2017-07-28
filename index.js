@@ -26,6 +26,7 @@ function inject(bot, options) {
         bot.on('move', function() {
             socket.emit('entity', bot.entity);
             socket.emit('blocks', ['green']);
+            console.log(bot.blockAt(bot.entity.position));
         });
 
         bot.on('entitySpawn', function(entity) {
