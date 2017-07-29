@@ -1,5 +1,3 @@
-const chroma = require('chroma-js');
-
 (function() {
     const io = window.io,
         socket = io.connect(),
@@ -104,7 +102,7 @@ const chroma = require('chroma-js');
             });
             blocks["0"].forEach(function(block) {
                 if (block.type !== 0) {
-                    context.fillStyle = chroma(blockColours[block.type] || colours['red']).lighten(20).hex();
+                    context.fillStyle = shadeColor(blockColours[block.type] || colours['red'], 25);
                     const x = centerX + xFromMc * (block.x - botEntity.position.x);
                     const z = centerZ + zFromMc * (block.z - botEntity.position.z);
                     context.fillRect(x, z, 8, 8);
@@ -210,3 +208,8 @@ const chroma = require('chroma-js');
     });
 
 }());
+
+function shadeColor(color, percent) {
+    let num = parseInt(color.slice(1),16), amt = Math.round(2.55 * percent), R = (num >> 16) + amt, G = (num >> 8 & 0x00FF) + amt, B = (num & 0x0000FF) + amt;
+    return "#" + (0x1000000 + (R<255?R<1?0:R:255)*0x10000 + (G<255?G<1?0:G:255)*0x100 + (B<255?B<1?0:B:255)).toString(16).slice(1);
+}
