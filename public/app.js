@@ -187,4 +187,12 @@
         }
     }
 
+    const chatInput = document.getElementById('chat');
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.keyCode === 13) {
+            socket.emit('chat', { text: chatInput.value });
+            chatInput.value = '';
+        }
+    });
+
 }());

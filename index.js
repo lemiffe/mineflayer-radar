@@ -69,12 +69,8 @@ function inject(bot, options) {
             bot.look(look.yaw, look.pitch);
         });
 
-        const chatInput = document.getElementById('chat');
-        chatInput.addEventListener('keypress', (e) => {
-            if (e.keyCode === 13) {
-                bot.chat(chatInput.value);
-                chatInput.value = '';
-            }
+        socket.on('chat', function (obj) {
+            bot.chat(obj.text);
         });
     });
 }
