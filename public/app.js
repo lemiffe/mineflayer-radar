@@ -37,6 +37,10 @@
         }
     });
 
+    socket.on('chatReceived', function (msgObj) {
+        console.log(msgObj.user, msgObj.message);
+    });
+
     let colours = {
         white: '#ffffff',
         black: '#000000',

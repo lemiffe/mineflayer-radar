@@ -72,5 +72,9 @@ function inject(bot, options) {
         socket.on('chat', function (obj) {
             bot.chat(obj.text);
         });
+
+        bot.on('chat', (username, message) => {
+            socket.emit('chatReceived', {user: username, message: message});
+        });
     });
 }
