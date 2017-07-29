@@ -1,3 +1,5 @@
+const chroma = require('chroma-js');
+
 (function() {
     const io = window.io,
         socket = io.connect(),
@@ -99,6 +101,14 @@
                 const x = centerX + xFromMc * (block.x - botEntity.position.x);
                 const z = centerZ + zFromMc * (block.z - botEntity.position.z);
                 context.fillRect(x, z, 8, 8);
+            });
+            blocks["-1"].forEach(function(block) {
+                if (block.type !== 0) {
+                    context.fillStyle = chroma(blockColours[block.type] || colours['red']).lighten(20).hex();
+                    const x = centerX + xFromMc * (block.x - botEntity.position.x);
+                    const z = centerZ + zFromMc * (block.z - botEntity.position.z);
+                    context.fillRect(x, z, 8, 8);
+                }
             });
         }
 
