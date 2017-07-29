@@ -93,12 +93,12 @@
         context.fillRect(0, 0, canvas.width, canvas.height);
 
         // Ground
-        if (blocks && Array.isArray(blocks) && blocks.length > 0) {
-            blocks.forEach(function(block) {
+        if (blocks) {
+            blocks["-1"].forEach(function(block) {
                 context.fillStyle = blockColours[block.type] || colours['red'];
                 const x = centerX + xFromMc * (block.x - botEntity.position.x);
                 const z = centerZ + zFromMc * (block.z - botEntity.position.z);
-                context.fillRect(x, z, 8, 8); // Tmp, should be 10
+                context.fillRect(x, z, 8, 8);
             });
         }
 

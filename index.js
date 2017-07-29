@@ -31,19 +31,28 @@ function inject(bot, options) {
         setTimeout(function () {
             setInterval(function () {
                 if (bot && bot.entity && bot.entity.position) {
-                    let blocks = [];
-                    const y = bot.entity.position.y - 1;
+                    const botY = Math.round(bot.entity.position.y);
                     const botX = Math.round(bot.entity.position.x);
                     const botZ = Math.round(bot.entity.position.z);
-                    for (let x = botX - 8; x <= botX + 8; x++) {
-                        for (let z = botZ - 4; z <= botZ + 4; z++) {
-                            let pos = vec3(x, y, z);
-                            let block = bot.blockAt(pos);
-                            if (block && block.position) {
-                                blocks.push({type: block.type, x: block.position.x, z: block.position.z});
+                    let blocks = {
+                        "-1": [],
+                        "0": [],
+                        "1": [],
+                        "2": [],
+                    };
+                    for (let y = botY - 1; y <= botY + 2; y++) {
+                        for (let x = botX - 8; x <= botX + 8; x++) {
+                            for (let z = botZ - 4; z <= botZ + 4; z++) {
+                                let pos = vec3(x, y, z);
+                                let block = bot.blockAt(pos);
+                                if (block && block.position) {
+                                    const key = (y - botY).toString();
+                                    blocks[key].push({type: block.type, x: block.position.x, z: block.position.z});
+                                }
                             }
                         }
                     }
+
                     socket.emit('blocks', blocks);
                 }
             }, 400);
