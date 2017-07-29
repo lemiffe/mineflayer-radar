@@ -35,12 +35,12 @@ function inject(bot, options) {
                     const botX = Math.round(bot.entity.position.x);
                     const botZ = Math.round(bot.entity.position.z);
                     let blocks = {
+                        "-2": [],
                         "-1": [],
                         "0": [],
                         "1": [],
-                        "2": [],
                     };
-                    for (let y = botY - 1; y <= botY + 2; y++) {
+                    for (let y = botY - 2; y <= botY + 1; y++) {
                         for (let x = botX - 8; x <= botX + 8; x++) {
                             for (let z = botZ - 4; z <= botZ + 4; z++) {
                                 let pos = vec3(x, y, z);

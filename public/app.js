@@ -94,15 +94,25 @@
 
         // Ground
         if (blocks && blocks["-1"] && blocks["0"]) {
+            blocks["-2"].forEach(function(block) {
+                if (block.type !== 0) {
+                    context.fillStyle = shadeColor(blockColours[block.type] || colours['red'], -15);
+                    const x = centerX + xFromMc * (block.x - botEntity.position.x);
+                    const z = centerZ + zFromMc * (block.z - botEntity.position.z);
+                    context.fillRect(x, z, 8, 8);
+                }
+            });
             blocks["-1"].forEach(function(block) {
-                context.fillStyle = blockColours[block.type] || colours['red'];
-                const x = centerX + xFromMc * (block.x - botEntity.position.x);
-                const z = centerZ + zFromMc * (block.z - botEntity.position.z);
-                context.fillRect(x, z, 8, 8);
+                if (block.type !== 0) {
+                    context.fillStyle = blockColours[block.type] || colours['red'];
+                    const x = centerX + xFromMc * (block.x - botEntity.position.x);
+                    const z = centerZ + zFromMc * (block.z - botEntity.position.z);
+                    context.fillRect(x, z, 8, 8);
+                }
             });
             blocks["0"].forEach(function(block) {
                 if (block.type !== 0) {
-                    context.fillStyle = shadeColor(blockColours[block.type] || colours['red'], 20);
+                    context.fillStyle = shadeColor(blockColours[block.type] || colours['red'], 15);
                     const x = centerX + xFromMc * (block.x - botEntity.position.x);
                     const z = centerZ + zFromMc * (block.z - botEntity.position.z);
                     context.fillRect(x, z, 8, 8);
@@ -110,15 +120,7 @@
             });
             blocks["1"].forEach(function(block) {
                 if (block.type !== 0) {
-                    context.fillStyle = shadeColor(blockColours[block.type] || colours['red'], 40);
-                    const x = centerX + xFromMc * (block.x - botEntity.position.x);
-                    const z = centerZ + zFromMc * (block.z - botEntity.position.z);
-                    context.fillRect(x, z, 8, 8);
-                }
-            });
-            blocks["2"].forEach(function(block) {
-                if (block.type !== 0) {
-                    context.fillStyle = shadeColor(blockColours[block.type] || colours['red'], 60);
+                    context.fillStyle = shadeColor(blockColours[block.type] || colours['red'], 27);
                     const x = centerX + xFromMc * (block.x - botEntity.position.x);
                     const z = centerZ + zFromMc * (block.z - botEntity.position.z);
                     context.fillRect(x, z, 8, 8);
