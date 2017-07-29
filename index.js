@@ -24,12 +24,12 @@ function inject(bot, options) {
     });
 
     io.sockets.on('connection', function (socket) {
-        bot.on('move', function() {
+        bot.on('move', function () {
             socket.emit('entity', bot.entity);
         });
 
-        setTimeout(function() {
-            setInterval(function() {
+        setTimeout(function () {
+            setInterval(function () {
                 if (bot && bot.entity && bot.entity.position) {
                     let blocks = [];
                     const y = bot.entity.position.y - 1;
@@ -49,24 +49,32 @@ function inject(bot, options) {
             }, 400);
         }, 6000);
 
-        bot.on('entitySpawn', function(entity) {
+        bot.on('entitySpawn', function (entity) {
             socket.emit('entitySpawn', entity);
         });
 
-        bot.on('entityGone', function(entity) {
+        bot.on('entityGone', function (entity) {
             socket.emit('entityGone', entity);
         });
 
-        bot.on('entityMoved', function(entity) {
+        bot.on('entityMoved', function (entity) {
             socket.emit('entityMoved', entity);
         });
 
-        socket.on('controlState', function(state) {
+        socket.on('controlState', function (state) {
             bot.setControlState(state.name, state.value);
         });
 
-        socket.on('look', function(look) {
+        socket.on('look', function (look) {
             bot.look(look.yaw, look.pitch);
+        });
+
+        const chatInput = document.getElementById('chat');
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.keyCode === 13) {
+                bot.chat(chatInput.value);
+                chatInput.value = '';
+            }
         });
     });
 }
