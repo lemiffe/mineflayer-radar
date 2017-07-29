@@ -32,8 +32,9 @@
     });
 
     socket.on('blocks', function (newBlocks) {
-        if (newBlocks !== null && newBlocks !== 0 && Array.isArray(newBlocks) && newBlocks.length > 0) {
+        if (newBlocks !== null && newBlocks !== 0) {
             blocks = newBlocks;
+            console.log(blocks);
         }
     });
 
@@ -93,7 +94,7 @@
         context.fillRect(0, 0, canvas.width, canvas.height);
 
         // Ground
-        if (blocks) {
+        if (blocks && "-1" in Object.keys(blocks)) {
             blocks["-1"].forEach(function(block) {
                 context.fillStyle = blockColours[block.type] || colours['red'];
                 const x = centerX + xFromMc * (block.x - botEntity.position.x);
