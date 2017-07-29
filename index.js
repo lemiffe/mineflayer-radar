@@ -35,18 +35,18 @@ function inject(bot, options) {
                     const y = bot.entity.position.y - 1;
                     const botX = Math.round(bot.entity.position.x);
                     const botZ = Math.round(bot.entity.position.z);
-                    for (let x = botX - 3; x <= botX + 3; x++) {
-                        for (let z = botZ - 2; z <= botZ + 2; z++) {
+                    for (let x = botX - 5; x <= botX + 5; x++) {
+                        for (let z = botZ - 3; z <= botZ + 3; z++) {
                             let pos = vec3(x, y, z);
                             let block = bot.blockAt(pos);
                             if (block && block.position) {
-                                blocks.push({type: block.type, name: block.name, x: block.position.x, z: block.position.z});
+                                blocks.push({type: block.type, x: block.position.x, z: block.position.z});
                             }
                         }
                     }
                     socket.emit('blocks', blocks);
                 }
-            }, 600);
+            }, 400);
         }, 6000);
 
         bot.on('entitySpawn', function(entity) {
